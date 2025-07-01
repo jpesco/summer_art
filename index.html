@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rotating PNG Gallery</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    img {
+
+      max-width: 480px;
+      max-height: 480px;
+      width: auto;
+      height: auto;
+      transition: opacity 1s ease-in-out;
+
+<!-- 
+
+      max-width: 70%;
+      height: auto;
+      transition: opacity 1s ease-in-out;
+-->
+    }
+  </style>
+</head>
+<body>
+  <img id="artDisplay" src="summer-art/summer-beachside.png" alt="Summer Art">
+
+  <script>
+    const images = [
+	"summer-art/summer-flowers.png",
+	"summer-art/summer-palm.png",
+	"summer-art/summer-seafront.png",
+	"summer-art/summer-sernity.png",
+	"summer-art/summer-shades.png",
+	"summer-art/summer-umbrella.png",
+	"summer-art/summer-watermellon.png",
+	"summer-art/summer-beachside.png"
+
+      // Add or remove filenames as needed
+    ];
+
+    let currentIndex = 0;
+    const imgElement = document.getElementById('artDisplay');
+
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      imgElement.style.opacity = 0;
+      setTimeout(() => {
+        imgElement.src = images[currentIndex];
+        imgElement.style.opacity = 1;
+      }, 500);
+    }, 5000); // 10 seconds
+  </script>
+</body>
+</html>
+
