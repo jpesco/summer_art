@@ -1,64 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Rotating PNG Gallery</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Hard-Coded Paired Slideshow</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
+      padding: 20px;
+      font-family: sans-serif;
+      background: #f9f9f9;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 100vh;
-      background-color: #f0f0f0;
     }
-    img {
-
-      max-width: 480px;
-      max-height: 480px;
-      width: auto;
-      height: auto;
-      transition: opacity 1s ease-in-out;
-
-<!-- 
-
-      max-width: 70%;
-      height: auto;
-      transition: opacity 1s ease-in-out;
--->
+    .slides {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
     }
+    .slides img {
+      width: 480px;
+      height: 480px;
+      object-fit: contain;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 12px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #0066cc;
+      padding: 8px 12px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    nav a:hover { background: #e6f7ff; }
   </style>
 </head>
 <body>
-  <img id="artDisplay" src="images/beachside-artwork.png" alt="Summer Art">
+
+  <div class="slides">
+    <img id="artwork" alt="Artwork slide">
+    <img id="poem"    alt="Poem slide">
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="pages/page1.html">Page 1</a></li>
+      <li><a href="pages/page2.html">Page 2</a></li>
+      <li><a href="pages/page3.html">Page 3</a></li>
+      <li><a href="pages/page4.html">Page 4</a></li>
+      <li><a href="pages/page5.html">Page 5</a></li>
+      <li><a href="pages/page6.html">Page 6</a></li>
+    </ul>
+  </nav>
 
   <script>
-    const images = [
-	"images/path-artwork.png",
-	"images/paradise-artwork.png",
-	"images/summer-artwork.png",
-	"images/together-artwork.png",
-	"images/shades-artwork.png",
-	"images/umbrella-artwork.png",
-	"images/watermellon-artwork.png",
-	"images/beachside-artwork.png"
+    document.addEventListener('DOMContentLoaded', () => {
+      const artImg  = document.getElementById('artwork');
+      const poemImg = document.getElementById('poem');
 
-      // Add or remove filenames as needed
-    ];
+      // Hard-coded pairs array
+      const pairs = [
+        { name: "beachside",  artwork: "beachside-artwork.png",  poem: "beachside-poem.png"  },
+        { name: "paradise",   artwork: "paradise-artwork.png",   poem: "paradise-poem.png"   },
+        { name: "path",       artwork: "path-artwork.png",       poem: "path-poem.png"       },
+        { name: "sandals",    artwork: "sandals-artwork.png",    poem: "sandals-poem.png"    },
+        { name: "together",   artwork: "together-artwork.png",   poem: "together-poem.png"   },
+        { name: "umbrella",   artwork: "umbrella-artwork.png",   poem: "umbrella-poem.png"   },
+        { name: "watermelon", artwork: "watermelon-artwork.png", poem: "watermelon-poem.png" }
+      ];
 
-    let currentIndex = 0;
-    const imgElement = document.getElementById('artDisplay');
+      let idx = 0;
+      function showPair() {
+        const { name, artwork, poem } = pairs[idx];
+        artImg.src = `images/${artwork}`;
+        artImg.alt = `${name} artwork`;
+        poemImg.src = `images/${poem}`;
+        poemImg.alt = `${name} poem`;
+      }
 
-    setInterval(() => {
-      currentIndex = (currentIndex + 1) % images.length;
-      imgElement.style.opacity = 0;
-      setTimeout(() => {
-        imgElement.src = images[currentIndex];
-        imgElement.style.opacity = 1;
-      }, 500);
-    }, 5000); // 10 seconds
+      // Initial display, then rotate every 5s
+      showPair();
+      setInterval(() => {
+        idx = (idx + 1) % pairs.length;
+        showPair();
+      }, 5000);
+    });
   </script>
+
 </body>
 </html>
 

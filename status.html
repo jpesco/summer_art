@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Status Bar Example</title>
+  <style>
+    body {
+      margin: 0;
+      padding-top: 60px; /* Space for fixed bar */
+    }
+
+    .status-bar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #333;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+
+    .status-bar select,
+    .status-bar button {
+      margin-left: 10px;
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+
+    .status-bar select {
+      background: white;
+      color: black;
+    }
+
+    .status-bar button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .status-bar button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="status-bar">
+    <div>
+      <label for="options">Choose:</label>
+      <select id="options">
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+      </select>
+    </div>
+    <div>
+      <button onclick="handleAction1()">Action 1</button>
+      <button onclick="handleAction2()">Action 2</button>
+    </div>
+  </div>
+
+  <div style="padding: 20px;">
+    <p>Scroll down to see the pinned status bar remains fixed.</p>
+    <p style="margin-top: 1000px;">More content here...</p>
+  </div>
+
+  <script>
+    function handleAction1() {
+      alert("Action 1 triggered!");
+    }
+
+    function handleAction2() {
+      alert("Action 2 triggered!");
+    }
+  </script>
+
+</body>
+</html>
+
